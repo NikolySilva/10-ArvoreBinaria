@@ -71,7 +71,7 @@ void menu()
 void inicializar()
 {
 
-	// provisÛrio porque n„o libera a memoria usada pela arvore
+	// provis√≥rio porque n√£o libera a memoria usada pela arvore
 	NO* raiz = NULL;
 	
 	cout << "Arvore inicializada \n";
@@ -121,7 +121,19 @@ NO* criaNO(int valor)
 
 NO* insereArvore(NO* no, int valor)
 {
-	
+	if (no == NULL) {
+		no = criaNO(valor);
+		return no;
+	}
+	else if (valor <= no->valor) {
+		no->esq = insereArvore(no->esq, valor);
+		cout << "Inserido do lado esquerdo!" << endl;
+	}
+	else {
+		no->dir = insereArvore(no->dir, valor);
+		cout << "Inserido do lado direito!" << endl;
+	}
+	return no;
 }
 
 int elementosArvore(NO* no)
@@ -135,5 +147,16 @@ int elementosArvore(NO* no)
 
 void exibirElementosArvore(NO* no)
 {
-	
+	if (raiz == NULL) {
+		cout << "Arvore vazia!";
+		return;
+	}
+	if (no->esq != NULL) {
+		cout << no->valor << endl;
+		exibirElementosArvore(no->esq);
+	} 
+	if (no->dir != NULL) {
+		cout << no->valor << endl;
+		exibirElementosArvore(no->dir);
+	}
 }
